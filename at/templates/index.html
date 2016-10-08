@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]><body class="ie ie7"><![endif]-->
+<!--[if IE 8 ]><body class="ie ie8"><![endif]-->
+<!--[if IE 9 ]><body class="ie ie9"><![endif]-->
+<html class='no-js' lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <title>ANZ</title>
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&subset=vietnamese" rel="stylesheet">
+    <link type="image/x-icon" href="{{ url_for('static', filename='images/fav.png')}}" rel="shortcut icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css')}}">
+</head>
+
+<body>
+    <!--===========================-->
+    <!--==========Header===========-->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-holder">
+        <header class='main-wrapper header'>
+            <div class="container apex">
+                <div class="row">
+
+                    <nav class="navbar header-navbar" role="navigation">
+                        <div class="navbar-header">
+                            <div class="logo navbar-brand">
+                                <a href="https://www.anz.com/vietnam/" title="ANZ"></a>
+                            </div>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <div class="navbar-right">
+                            </div>
+                        </div>
+                    </nav>
+
+                </div>
+            </div>
+        </header>
+
+        <div class='main-wrapper content'>
+            <section class="relative software_slider">
+                <div class="forma-slider">
+                    <div class="container">
+                        <div class="row">
+                            <div id="form_slider" data-anchor="form_slider">
+
+                                <ul class="form-bxslider list-unstyled">
+
+                                    <li>
+                                        <div class="list-forstart fin_1">
+                                            <p class="text-1">HOÀN PHÍ THƯỜNG NIÊN & NHẬN VALI</p>
+                                            <p class="text-2">VỚI THẺ TÍN DỤNG ANZ</p>
+                                            <p class="text-3">*Chỉ áp dụng đến ngày 31/11/2016</p>
+                                        </div>
+                                        <div class="img-slider hidden-xs slide-man3 fin_2"></div>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                            <div class="clearfix visible-xs visible-md"></div>
+
+                            <div class="container relative fin_3" id='elem-portable'>
+                                <div class="reg-now">
+
+                                     {% for field in form if field.widget.input_type != 'hidden' %}
+                                        {% if field.errors %}
+                                        <div class='alert alert-danger'><a class='close' data-dismiss='alert'>×</a>
+                                            {%for error in field.errors%}
+                                                {{error}}</br>
+                                            {%endfor%}
+                                        </div>
+                                        {%endif%}
+                                    {%endfor%}
+
+                                    <form class='reg-now-visible' id='formIndex' action="/" method="post" accept-charset="utf-8" role="form">
+                                        {{ form.hidden_tag() }}
+                                        <p>Thẻ tín dụng ANZ nằm trong tầm tay bạn. Hãy điền thông tin của bạn và chúng tôi sẽ gọi ngay cho bạn trong một giờ để hỗ trợ bạn đăng ký:</p>
+                                        <p class="title-form">Bạn có Thẻ tín dụng ANZ chưa?</p>
+                                        <div class="radio-custom radio-danger fl mr-10">
+                                              {%if form.luong.data == 'yes'%}
+                                            <input type="radio" id="yes" name="luong" value="yes" required oninvalid="setCustomValidity('Xin vui lòng chọn một ô')" onclick="clearValidity()" checked/>
+                                            {%else%}
+                                            <input type="radio" id="yes" name="luong" value="yes" required oninvalid="setCustomValidity('Xin vui lòng chọn một ô')" onclick="clearValidity()"/>
+                                            {%endif%}
+                                            <label for="yes">Có</label>
+                                        </div>
+                                        <div class="radio-custom radio-danger fl">
+                                             {%if form.luong.data == 'no'%}
+                                            <input type="radio" id="no" name="luong" value="no" required onclick="clearValidity()" checked/>
+                                            {%else%}
+                                            <input type="radio" id="no" name="luong" value="no" required onclick="clearValidity()"/>
+                                            {%endif%}
+                                            <label for="no">Không</label>
+                                        </div>
+                                        <div class="clr"></div>
+                                        <p class="title-form mb-10">Thông tin cá nhân</p>
+                                        <div class='control-group'>
+                                            <input type="text" name="name" {%if form.data.name%} value="{{form.data.name|safe}}" {%endif%} placeholder='Họ và tên' required oninvalid="setCustomValidity('Tên không chính xác!')" oninput="setCustomValidity('')"/>
+                                        </div>
+
+                                        <div class='control-group'>
+                                            <input type="text" id="phone" name="phone" value={%if form.data.phone%} "{{form.data.phone|safe}}" {%else%} "" {%endif%} placeholder='Số điện thoại' required pattern="^[0-9]{10,12}$" oninvalid="setCustomValidity('Số điện thoại không chính xác')" oninput="setCustomValidity('')"/>
+                                        </div>
+
+                                        <div class='control-group'>
+                                            <input type="text" name="email" value={%if form.data.email%} "{{form.data.email|safe}}" {%else%} "" {%endif%} class='insert-attr' placeholder='Địa chỉ email' required oninvalid="setCustomValidity('Email không chính xác!')" oninput="setCustomValidity('')"/>
+                                        </div>
+                                        <div class="relative">
+                                            {{slbox_region|safe}}
+                                        </div>
+                                        <div class="relative">
+                                            {{slbox_caoch|safe}}
+                                        </div>
+                                        <div class="relative">
+                                            {{slbox_cardtype|safe}}
+                                        </div>
+                                        <div class="checkbox-custom checkbox-danger">
+                                            {%if form.toidongy.data%}
+                                            <input type="checkbox" id="toidongy" name="toidongy" required oninvalid="setCustomValidity('Bạn phải đồng ý với điều khoản này')" onchange="setCustomValidity('')" checked/>
+                                            {%else%}
+                                            <input type="checkbox" id="toidongy" name="toidongy" required oninvalid="setCustomValidity('Bạn phải đồng ý với điều khoản này')" onchange="setCustomValidity('')"/>
+                                            {%endif%}
+                                            <label for="toidongy" class="label-form-dk">Tôi đồng ý rằng ANZ có thể sử dụng thông tin trên đây để liên hệ với tôi nhằm giới thiệu những sản phẩm, dịch vụ và chương trình khuyến mãi của ANZ từ nay trở về sau</label>
+                                        </div>
+
+                                        <button type="submit" value="Register Now" class='btn submit sub-form' name="submit">Hoàn thành và Gửi</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end container -->
+                </div>
+            </section>
+
+
+
+            <section class="container make-row">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Example Tabs -->
+                        <div class="example-wrap">
+                            <div class="nav-tabs-horizontal">
+                                <ul class="nav nav-tabs" data-plugin="nav-tabs" role="tablist">
+                                    <li class="active" role="presentation">
+                                        <a data-toggle="tab" href="#exampleTabsOne" aria-controls="exampleTabsOne" role="tab">Thẻ Chuẩn</a>
+                                    </li>
+                                    <li role="presentation" class="thevang">
+                                        <a data-toggle="tab" href="#exampleTabsTwo" aria-controls="exampleTabsTwo" role="tab">Thẻ Vàng</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a data-toggle="tab" href="#exampleTabsThree" aria-controls="exampleTabsThree" role="tab">Thẻ Platinum</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a data-toggle="tab" href="#exampleTabsFour" aria-controls="exampleTabsFour" role="tab">Thẻ Travel Platinum</a>
+                                    </li>
+                                </ul>
+                                <div class="clr"></div>
+                                <div class="tab-content padding-top-20">
+                                    <div class="tab-pane active" id="exampleTabsOne" role="tabpanel">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="card-info">
+                                                <p class="title1">LỢI ÍCH VƯỢT TRỘI</p>
+                                                <p>
+                                                    - Hoàn tiền <strong>0.3%</strong> không giới hạn trên tổng chi tiêu
+                                                    <br>- Tận hưởng ưu đãi tại hơn <strong>2.200 ngàn đối tác</strong> của chương trình ANZ Spot trên toàn Châu Á Thái Bình Dương
+                                                    <br>- Giảm <strong>5%</strong> khi đặt phòng trả trước tại Agoda bằng Thẻ Tín Dụng ANZ Chuẩn và Vàng.
+
+                                                </p>
+                                                <p class="title1">ƯU ĐÃI ĐẶC BIỆT</p>
+                                                <p>
+                                                    - Hoàn phí thường niên năm đầu tiên
+                                                </p>
+                                               <p class="title1">ĐIỀU KIỆN ÁP DỤNG</p>
+                                                <p>
+                                                    - Từ 18 tuổi trở lên
+                                                    <br>- Thu nhập tối thiểu <strong>8 triệu</strong>
+                                                    <br>- Sinh sống tại Hà Nội, Tp.Hồ Chí Minh, Bình Dương.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <img src="{{ url_for('static', filename='images/cash-bank.png')}}">
+                                           <a href="#" data-scroll="form_slider" class="btn submit a-trig btn-re">Đăng Ký Ngay</a>
+                                        </div>
+                                        <div class="clr"></div>
+                                    </div>
+                                    <div class="tab-pane" id="exampleTabsTwo" role="tabpanel">
+                                       <div class="col-sm-12 col-md-6">
+                                            <div class="card-info">
+                                                <p class="title1">LỢI ÍCH VƯỢT TRỘI</p>
+                                                <p>
+                                                    - Hoàn tiền <strong>0.3%</strong> không giới hạn trên tổng chi tiêu
+                                                    <br>- Tận hưởng ưu đãi tại hơn <strong>2.200 ngàn đối tác</strong> của chương trình ANZ Spot trên toàn Châu Á Thái Bình Dương
+                                                    <br>- Giảm <strong>5%</strong> khi đặt phòng trả trước tại Agoda bằng Thẻ Tín Dụng ANZ Chuẩn và Vàng.
+
+                                                </p>
+                                                <p class="title1">ƯU ĐÃI ĐẶC BIỆT</p>
+                                                <p>
+                                                    - Tặng Vali Eddas 20” trị giá <strong>2.0 triệu đồng</strong>
+                                                    <br>Điều kiện áp dụng:
+                                                    <br>- Từ 18 tuổi trở lên
+                                                    <br>- Thu nhập tối thiểu <strong>16 triệu</strong>
+                                                    <br>- Sinh sống tại Hà Nội, Tp.Hồ Chí Minh, Bình Dương.
+                                                </p>
+                                                <p class="title1">ĐIỀU KIỆN ÁP DỤNG</p>
+                                                 <p>
+                                                    - Từ 18 tuổi trở lên
+                                                    <br>- Thu nhập tối thiểu <strong>16 triệu</strong>
+                                                    <br>- Sinh sống tại Hà Nội, Tp.Hồ Chí Minh, Bình Dương.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <img src="{{ url_for('static', filename='images/cash-bank2.png')}}">
+                                           <a href="#" data-scroll="form_slider" class="btn submit a-trig btn-re">Đăng Ký Ngay</a>
+                                        </div>
+                                        <div class="clr"></div>
+                                    </div>
+                                    <div class="tab-pane" id="exampleTabsThree" role="tabpanel">
+                                       <div class="col-sm-12 col-md-6">
+                                            <div class="card-info">
+                                                <p class="title1">LỢI ÍCH VƯỢT TRỘI</p>
+                                                <p>
+                                                    - Hoàn tiền <strong>0,4%</strong> không giới hạn trên tổng chi tiêu và ưu đãi thêm <strong>5%</strong> hoàn tiền trên hóa đơn ẩm thực cuối tuần
+                                                    <br>- Bảo hiểm du lịch lên đến <strong>500.000 đô la Mỹ</strong>
+                                                    <br>- Đặc quyền ưu đãi miễn <strong>50%</strong> phí ra sân tại những Câu lạc bộ Golf uy tín tại Việt Nam
+                                                    <br>- Tận hưởng ưu đãi tại hơn <strong>2.200 ngàn đối tác</strong> của chương trình ANZ Spot trên toàn Châu Á Thái Bình Dương
+                                                    <br>- Giảm <strong>7%</strong> khi đặt phòng trả trước tại Agoda bằng Thẻ Tín Dụng ANZ Chuẩn và Vàng.
+                                                </p>
+                                                <p class="title1">ƯU ĐÃI ĐẶC BIỆT</p>
+                                                <p>
+                                                    - Tặng Vali Eddas 25” trị giá <strong>2.5 triệu đồng</strong>
+                                                </p>
+                                                <p class="title1">ĐIỀU KIỆN ÁP DỤNG</p>
+                                                <p>
+                                                    - Từ 18 tuổi trở lên
+                                                    <br>- Thu nhập tối thiểu <strong>20 triệu</strong>
+                                                    <br>- Sinh sống tại Hà Nội, Tp.Hồ Chí Minh, Bình Dương.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <img src="{{ url_for('static', filename='images/cash-bank3.png')}}">
+                                           <a href="#" data-scroll="form_slider" class="btn submit a-trig btn-re">Đăng Ký Ngay</a>
+                                        </div>
+                                        <div class="clr"></div>
+                                    </div>
+                                    <div class="tab-pane" id="exampleTabsFour" role="tabpanel">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="card-info">
+                                                <p class="title1">LỢI ÍCH VƯỢT TRỘI</p>
+                                                <p>
+                                                    - Chương trình bay miễn phí cùng ANZ từ những chi tiêu tích lũy hàng ngày.
+                                                    <br>- Dịch vụ phòng chờ đẳng cấp tại hơn <strong>850 phòng</strong> chờ sân bay trên toàn thế giới
+                                                    <br>- Bảo hiểm du lịch lên đến <strong>500.000 đô la Mỹ</strong>
+                                                    <br>- Miễn 50% phí ra sân tại <strong>6 Câu lạc bộ Golf</strong> uy tín tại Việt Nam
+                                                    <br>- Tận hưởng ưu đãi tại hơn <strong>2.200 ngàn đối tác</strong> của chương trình ANZ Spot trên toàn Châu Á Thái Bình Dương
+                                                    <br>- Giảm <strong>7%</strong> khi đặt phòng trả trước tại Agoda bằng Thẻ Tín Dụng ANZ Chuẩn và Vàng.
+                                                    <br>- Hỗ trợ thông tin và chăm sóc khách hàng 24/7
+                                                </p>
+                                                <p class="title1">ƯU ĐÃI ĐẶC BIỆT</p>
+                                                <p>
+                                                    - Tặng Vali Eddas trị giá đến <strong>2.5 triệu đồng</strong>
+                                                </p>
+                                                <p class="title1">ĐIỀU KIỆN ÁP DỤNG</p>
+                                                <p>
+                                                    - Từ 18 tuổi trở lên
+                                                    <br>- Thu nhập tối thiểu <strong>20 triệu</strong>
+                                                    <br>- Sinh sống tại Hà Nội, Tp.Hồ Chí Minh, Bình Dương.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <img src="{{ url_for('static', filename='images/cash-bank4.png')}}">
+                                           <a href="#" data-scroll="form_slider" class="btn submit a-trig btn-re">Đăng Ký Ngay</a>
+                                        </div>
+                                        <div class="clr"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Example Tabs -->
+                    </div>
+                </div>
+                <div class="clr"></div>
+            </section>
+        </div>
+
+        <!--===========================-->
+        <!--=========Footer============-->
+        <footer class='main-wrapper footer'>
+            <div class="partners" id='partners'>
+                <div class="container">
+                    <div class="row">
+                        <div class=" col-md-12">
+                            <div class="img1 fl">
+                                <a href="#">
+                                    <img src="{{ url_for('static', filename='images/img1.jpg')}}">
+                                </a>
+                            </div>
+                            <div class="img2 fl">
+                                <a href="#">
+                                    <img src="{{ url_for('static', filename='images/img2.jpg')}}">
+                                </a>
+                            </div>
+                            <div class="img2 fl">
+                                <a href="#">
+                                    <img src="{{ url_for('static', filename='images/img3.jpg')}}">
+                                </a>
+                            </div>
+
+
+                            <div class="img2 fl">
+                                <a href="#">
+                                    <img src="{{ url_for('static', filename='images/img4.jpg')}}">
+                                </a>
+                            </div>
+                            <div class="img2 fl">
+                                <a href="#">
+                                    <img src="{{ url_for('static', filename='images/img5.jpg')}}">
+                                </a>
+                            </div>
+                            <div class="img2 fl">
+                                <a href="#">
+                                    <img src="{{ url_for('static', filename='images/img6.jpg')}}">
+                                </a>
+                            </div>
+                            <div class="img2 fl">
+                                <a href="#">
+                                    <img src="{{ url_for('static', filename='images/img7.jpg')}}">
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="clr"></div>
+                </div>
+            </div>
+            <div class="container f-dk">
+                <p class="text-center footer-text-1">
+                    CÓ HÀNG NGÀN <span class="text-red-b">ƯU ĐÃI HẤP DẪN</span> ĐANG CHỜ BẠN
+                </p>
+                <p class="text-center footer-text-2">
+                    Thẻ tín dụng ANZ nằm trong tầm tay bạn.
+                    <br> Hãy điền thông tin của bạn và chúng tôi sẽ gọi ngay cho bạn trong 1 giờ để hỗ trợ bạn đăng ký.
+                </p>
+                <a href="#" data-scroll="form_slider" class='btn submit a-trig reg-footer'>Đăng Ký Ngay</a>
+            </div>
+            <div class="container bottom">
+                <div class="fl copyright">Copyright (c) 2016 accesstrade</div>
+                <nav>
+                    <ul style="margin:0px;">
+                        <li><a href="https://www.anz.com/vietnam/vn/auxiliary/contact-us/">LIÊN HỆ</a></li>
+                        <li><a href="https://www.anz.com/vietnam/">VỀ ANZ</a></li>
+                    </ul>
+
+                </nav>
+            </div>
+        </footer>
+
+
+        <!-- Top -->
+        <div id="back-top-wrapper" class="visible-lg">
+            <p id="back-top" class='bounceOut'>
+                <a href="#top">
+                    <span></span>
+                </a>
+            </p>
+        </div>
+
+    </div>
+    <div class="mask"></div>
+    <script src="{{ url_for('static', filename='js/jquery-1.10.1.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/modernizr.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.bxslider.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.customSelect.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.validate.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.colorbox-min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/custom.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/loader.js')}}"></script>
+
+    <script src="//cdn.accesstrade.vn/js/tracking.js" ></script>
+    <script type="text/javascript">
+        AT.track();
+        function clearValidity() {
+            document.getElementById('yes').setCustomValidity('');
+        }
+
+        function onInvalidCustom(idstr) {
+            var me = document.getElementById(idstr);
+            me.setCustomValidity('Số điện thoại không chính xác');
+            //me.setCustomValidity('');
+        }
+
+        function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length,c.length);
+                    }
+                }
+                return "";
+        }
+            //alert(getCookie("_aff_network") + "|" + getCookie("_aff_sid"))
+            $("#aff_source").val(getCookie("_aff_network"));
+            $("#aff_sid").val(getCookie("_aff_sid"));
+
+    </script>
+
+</body>
+
+</html>
